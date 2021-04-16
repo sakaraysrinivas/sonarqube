@@ -1,0 +1,85 @@
+Sonar qube code quality
+=======================
+
+Sonar scanner installation 
+==========================
+=========new scanner================
+wget 
+https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.2.0.1227-linux.zip
+unzip sonar-scanner-cli-3.2.0.1227-linux.zip
+# mv sonar-scanner-3.2.0.1227-linux /opt/sonar_scanner
+
+
+sonarqube installation 
+======================
+                                        Sonarqube Installation  - ec2-user
+                                     ===============================================
+
+cd /opt
+sudo wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-7.6.zip
+sudo unzip sonarqube-7.6.zip
+we need to give full permission to sonarqube.7.6. (we need to run as ec2-user)
+
+sudo chmod 777 -R sonarqube-7.6
+sudo chown -R ec2-user:ec2-user /opt/sonarqube-7.6
+cd sonarqube-7.6 - to change owner to ec2-user
+
+
+cd bin
+cd linux-x86-64
+
+
+ls
+sh sonar.sh start
+sh sonar.sh status
+
+publicip:9000
+
+UN:admin
+PW:admin
+
+youtube = https://www.youtube.com/watch?v=tuIZok81iLk sonarqube --
+Github - https://github.com/nihaldevops/my-app
+
+
+install sonarqube 
+install sonarscanner
+install sonarqube scanner
+Goto jenkins --> manage jenkins --> configure and give sonarqube server 
+name -sonar-6
+server url -http://3.133.110.69:9000/
+add token - token wil get from
+Goto sonarqube --> account --> generate token and copy in confgure system
+
+Goto jenkins  --> manage jenkins   -->global tool configuraion
+here add sonarqube scanner  
+Name - sonar_scanner
+path - /opt/sonar_scanner
+
+apply and save
+===========================================================================================
+
+
+pipeline {
+    agent any 
+    environment {
+        PATH = "/opt/apache-maven-3.8.1/bin/:$PATH"
+    }
+    stages {
+        stage('fetch code') {
+            steps {
+                git 'https://github.com/nihaldevops/my-app.git'
+            }
+        }
+        stage('build package') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+        stage('SonarQube Analysis') {
+            steps {
+               sh "mvn sonar:sonar"
+        }
+    }
+    }
+}
