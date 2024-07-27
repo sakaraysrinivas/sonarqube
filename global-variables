@@ -4,7 +4,7 @@ node {
   echo "Current Build Absolute URL ${currentBuild.absoluteUrl}"
   echo "Current Build Result ${currentBuild.currentResult}"
   
-//   Accessing data from env object
+//   Accessing data from env object ooo
 
   echo "Jenkins Home ${env.JENKINS_HOME}"
   echo "Jenkins URL ${env.JENKINS_URL}"
