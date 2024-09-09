@@ -19,7 +19,7 @@ cd /opt
 sudo wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-7.6.zip
 sudo unzip sonarqube-7.6.zip
 we need to give full permission to sonarqube.7.6. (we need to run as ec2-user)
-
+fdfsdffs
 sudo chmod 777 -R sonarqube-7.6
 sudo chown -R ec2-user:ec2-user /opt/sonarqube-7.6
 cd sonarqube-7.6 - to change owner to ec2-user
