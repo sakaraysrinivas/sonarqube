@@ -19,7 +19,7 @@ node{
 		sh "scp target/myweb.war ${tomcatUsr}@172.31.12.253:/opt/tomcat8/webapps/"
         sh "ssh ${tomcatUsr}@172.31.12.253 /opt/tomcat8/bin/startup.sh"
 		mail bcc: '', 
-			  body: '''myweb app deployed to Devlopment
+			  body: '''myweb app deployed to Dev
 						Thanks
 						DevOps''', 
 			  cc: '', 
