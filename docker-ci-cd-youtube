@@ -7,7 +7,7 @@ node{
      def mvnCMD = "${mvnHome}/bin/mvn"
      sh "${mvnCMD} clean package"
    }
-   stage('Build Docker Ima'){
+   stage('Build Docker Image'){
      sh 'docker build -t kammana/my-app:2.0.0 .'
    }
    stage('Push Docker Image'){
